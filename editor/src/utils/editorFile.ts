@@ -1,10 +1,10 @@
-export interface Point {
-    x: number;
-    y: number;
-}
+// export interface Point {
+//     x: number;
+//     y: number;
+// }
 
-export interface EditorFile {
-    width: number;
-    height: number;
-    strokes: [[Point]];
-}
+// export interface EditorFile {
+//     width: number;
+//     height: number;
+//     strokes: [[Point]];
+// }

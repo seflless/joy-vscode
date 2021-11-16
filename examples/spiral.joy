@@ -1,0 +1,136 @@
+{
+  "frameX": 231,
+  "frameY": 299,
+  "turtleInstructions": {
+    "actions": [
+      {
+        "type": "turtle/color",
+        "color": {
+          "value": [
+            205,
+            0.59,
+            1
+          ],
+          "type": "color"
+        }
+      },
+      {
+        "type": "turtle/turn",
+        "angle": {
+          "type": "number",
+          "chain": [
+            {
+              "type": "number_raw",
+              "value": 30
+            }
+          ]
+        }
+      },
+      {
+        "type": "instructions/comment",
+        "value": "What this does, basically, is make me go in a triangle... but every time I draw a side, I draw it slightly bigger than the last one. Result: a triangular spiral!"
+      },
+      {
+        "type": "math/set",
+        "varname": {
+          "type": "variableName",
+          "refID": "id0"
+        },
+        "value": {
+          "type": "number",
+          "chain": [
+            {
+              "type": "number_raw",
+              "value": 20
+            }
+          ]
+        }
+      },
+      {
+        "type": "instructions/repeat",
+        "count": {
+          "type": "number",
+          "chain": [
+            {
+              "type": "number_raw",
+              "value": 23
+            }
+          ]
+        },
+        "actions": {
+          "actions": [
+            {
+              "type": "turtle/forward",
+              "steps": {
+                "type": "number",
+                "chain": [
+                  {
+                    "type": "variableName",
+                    "refID": "id0"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "instructions/comment",
+              "value": "Changing this number below is pretty fun ;) Can you make a square spiral? Or a pentagonal spiral?"
+            },
+            {
+              "type": "turtle/turn",
+              "angle": {
+                "type": "number",
+                "chain": [
+                  {
+                    "type": "number_raw",
+                    "value": 120
+                  }
+                ]
+              }
+            },
+            {
+              "type": "math/operation",
+              "operation": {
+                "value": "+",
+                "type": "choose"
+              },
+              "varname": {
+                "type": "variableName",
+                "refID": "id0"
+              },
+              "value": {
+                "type": "number",
+                "chain": [
+                  {
+                    "type": "number_raw",
+                    "value": 20
+                  }
+                ]
+              }
+            }
+          ],
+          "resetVariables": false,
+          "type": "actions"
+        }
+      }
+    ],
+    "resetVariables": true,
+    "type": "actions"
+  },
+  "_references": {
+    "id0": {
+      "id": "id0",
+      "tags": [
+        "number"
+      ],
+      "data": {
+        "value": "side size",
+        "color": [
+          202,
+          0.83,
+          1
+        ]
+      },
+      "connected": 3
+    }
+  }
+}

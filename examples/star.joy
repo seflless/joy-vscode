@@ -1,0 +1,80 @@
+{
+  "frameX": 152,
+  "frameY": 378,
+  "turtleInstructions": {
+    "actions": [
+      {
+        "type": "instructions/comment",
+        "value": "Welcome to The Joy of Turtle! You can hover over (1) (2) (3) etc... to see me draw something step-by-step. Or, you can change my instructions, colors, numbers, and see the result INSTANTLY. Have fun!"
+      },
+      {
+        "type": "turtle/color",
+        "color": {
+          "value": [
+            49,
+            0.99,
+            1
+          ],
+          "type": "color"
+        }
+      },
+      {
+        "type": "turtle/turn",
+        "angle": {
+          "type": "number",
+          "chain": [
+            {
+              "type": "number_raw",
+              "value": 18
+            }
+          ]
+        }
+      },
+      {
+        "type": "instructions/repeat",
+        "count": {
+          "type": "number",
+          "chain": [
+            {
+              "type": "number_raw",
+              "value": 5
+            }
+          ]
+        },
+        "actions": {
+          "actions": [
+            {
+              "type": "turtle/forward",
+              "steps": {
+                "type": "number",
+                "chain": [
+                  {
+                    "type": "number_raw",
+                    "value": 300
+                  }
+                ]
+              }
+            },
+            {
+              "type": "turtle/turn",
+              "angle": {
+                "type": "number",
+                "chain": [
+                  {
+                    "type": "number_raw",
+                    "value": 144
+                  }
+                ]
+              }
+            }
+          ],
+          "resetVariables": false,
+          "type": "actions"
+        }
+      }
+    ],
+    "resetVariables": true,
+    "type": "actions"
+  },
+  "_references": {}
+}

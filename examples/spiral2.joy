@@ -1,0 +1,131 @@
+{
+    "frameX": 255,
+    "frameY": 256,
+    "turtleInstructions": {
+        "actions": [
+            {
+                "type": "instructions/comment",
+                "value": "Same idea as the triangular spiral, except this time with a really small turning angle and really small side size, I can make a CIRCULAR spiral!"
+            },
+            {
+                "type": "turtle/color",
+                "color": {
+                    "value": [
+                        9,
+                        0.81,
+                        1
+                    ],
+                    "type": "color"
+                }
+            },
+            {
+                "type": "math/set",
+                "varname": {
+                    "type": "variableName",
+                    "refID": "id0"
+                },
+                "value": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "instructions/repeat",
+                "count": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": 520
+                        }
+                    ]
+                },
+                "actions": {
+                    "actions": [
+                        {
+                            "type": "turtle/forward",
+                            "steps": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "variableName",
+                                        "refID": "id0"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "turtle/turn",
+                            "angle": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "number_raw",
+                                        "value": 5.1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "math/operation",
+                            "operation": {
+                                "value": "+",
+                                "type": "choose"
+                            },
+                            "varname": {
+                                "type": "variableName",
+                                "refID": "id0"
+                            },
+                            "value": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "number_raw",
+                                        "value": 0.04
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "instructions/comment",
+                            "value": "Putting my brush up/down to create a cool dashed-line pattern:"
+                        },
+                        {
+                            "type": "turtle/pen",
+                            "pen": {
+                                "value": -1,
+                                "type": "choose"
+                            }
+                        }
+                    ],
+                    "resetVariables": false,
+                    "type": "actions"
+                }
+            }
+        ],
+        "resetVariables": true,
+        "type": "actions"
+    },
+    "_references": {
+        "id0": {
+            "id": "id0",
+            "tags": [
+                "number"
+            ],
+            "data": {
+                "value": "side size",
+                "color": [
+                    13,
+                    0.92,
+                    1
+                ]
+            },
+            "connected": 3
+        }
+    }
+}

@@ -1,0 +1,206 @@
+{
+    "turtleInstructions": {
+        "actions": [
+            {
+                "type": "instructions/comment",
+                "value": "Draw the flower stem:"
+            },
+            {
+                "type": "turtle/color",
+                "color": {
+                    "value": [
+                        79,
+                        0.77,
+                        0.94
+                    ],
+                    "type": "color"
+                }
+            },
+            {
+                "type": "turtle/forward",
+                "steps": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": 243
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "instructions/comment",
+                "value": "Draw the flower head:"
+            },
+            {
+                "type": "turtle/color",
+                "color": {
+                    "value": [
+                        50,
+                        0.92,
+                        1
+                    ],
+                    "type": "color"
+                }
+            },
+            {
+                "type": "turtle/turn",
+                "angle": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": -90
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "instructions/repeat",
+                "count": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": 360
+                        }
+                    ]
+                },
+                "actions": {
+                    "actions": [
+                        {
+                            "type": "turtle/forward",
+                            "steps": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "number_raw",
+                                        "value": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "turtle/turn",
+                            "angle": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "number_raw",
+                                        "value": 1
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "resetVariables": false,
+                    "type": "actions"
+                }
+            },
+            {
+                "type": "instructions/comment",
+                "value": "Draw the flower petals:"
+            },
+            {
+                "type": "turtle/color",
+                "color": {
+                    "value": [
+                        23,
+                        0.97,
+                        1
+                    ],
+                    "type": "color"
+                }
+            },
+            {
+                "type": "turtle/turn",
+                "angle": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": -90
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "instructions/repeat",
+                "count": {
+                    "type": "number",
+                    "chain": [
+                        {
+                            "type": "number_raw",
+                            "value": 9
+                        }
+                    ]
+                },
+                "actions": {
+                    "actions": [
+                        {
+                            "type": "instructions/repeat",
+                            "count": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "number_raw",
+                                        "value": 105
+                                    }
+                                ]
+                            },
+                            "actions": {
+                                "actions": [
+                                    {
+                                        "type": "turtle/forward",
+                                        "steps": {
+                                            "type": "number",
+                                            "chain": [
+                                                {
+                                                    "type": "number_raw",
+                                                    "value": 2.2
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "type": "turtle/turn",
+                                        "angle": {
+                                            "type": "number",
+                                            "chain": [
+                                                {
+                                                    "type": "number_raw",
+                                                    "value": 2.5
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "resetVariables": false,
+                                "type": "actions"
+                            }
+                        },
+                        {
+                            "type": "turtle/turn",
+                            "angle": {
+                                "type": "number",
+                                "chain": [
+                                    {
+                                        "type": "number_raw",
+                                        "value": -182.5
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "resetVariables": false,
+                    "type": "actions"
+                }
+            }
+        ],
+        "resetVariables": true,
+        "type": "actions"
+    },
+    "_references": {},
+    "frameX": 250,
+    "frameY": 469
+}

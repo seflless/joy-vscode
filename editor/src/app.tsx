@@ -3,19 +3,12 @@ import { vscode } from "./utils/vscode";
 import { defaultDocument } from "./utils/defaultDocument";
 import { UI_EVENT } from "./types";
 import "./styles.css";
-import { EditorFile } from "utils/editorfile";
 import clone from "rfdc/default";
 import Turtle from "./turtle";
 import Demos from "./demos";
 
-console.log("TURTLE");
-console.log(Turtle);
-
-console.log("JOY");
-console.log(Joy);
-
 // Will be placed in global scope by extension
-declare let currentFile: EditorFile;
+declare let currentFile: any;
 
 export default function App(): JSX.Element {
   const rTLDrawState = React.useRef<any>();
@@ -25,8 +18,6 @@ export default function App(): JSX.Element {
     // If no initial document content was set, initialize it to the default file content
     // The extension will set the initial currentFile to null if so
     currentFile = currentFile || clone(defaultDocument);
-
-    console.log("HI!");
 
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
@@ -105,12 +96,15 @@ export default function App(): JSX.Element {
     });
 
     // Data
-    var data = Joy.loadFromURL();
-    if (!data) {
-      var model = _getParameterByName("drawing") || "star";
-      data = Demos[model];
-    }
-    data = data || {};
+    // var data = Joy.loadFromURL();
+    // if (!data) {
+    //   var model = _getParameterByName("drawing") || "star";
+    //   data = Demos[model];
+    // }
+    // data = data || {};
+    const data = currentFile;
+    console.log(currentFile);
+    console.log(JSON.stringify(data, null, "    "));
 
     // Init
     window.turtle = new Turtle({
@@ -157,7 +151,7 @@ export default function App(): JSX.Element {
       joy.update();
     };
 
-    console.log("BYE!");
+    
 
     // Draw initial document strokes
     syncVisualsToState();
