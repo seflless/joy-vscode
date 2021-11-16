@@ -1,7 +1,7 @@
 {
-	"name": "vscode-editor",
-	"displayName": "VS Code Editor",
-	"description": "A Custom Editor Extension for VS Code.",
+	"name": "joy-vscode",
+	"displayName": "Joy Editor for VS Code",
+	"description": "A Joy editor Extension for VS Code.",
 	"version": "0.7.0",
 	"license": "MIT","repository": {
 		"type": "git",

@@ -92,7 +92,7 @@ export class EditorProvider implements vscode.CustomTextEditorProvider {
   }
 
   // This is a unique identifier for our custom provider
-  private static readonly viewType = 'custom.editor'
+  private static readonly viewType = 'joy.editor'
 
   // We do nothing in our constructor for now
   constructor(private readonly context: vscode.ExtensionContext) {}
