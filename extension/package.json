@@ -27,8 +27,8 @@
 		"Visualization"
 	],
 	"activationEvents": [
-		"onCustomEditor:custom.editor",
-		"onCommand:custom.editor.new"
+		"onCustomEditor:joy.editor",
+		"onCommand:joy.editor.new"
 	],
 	"browser": "./dist/web/extension.js",
 	"main": "./dist/web/extension.js",
@@ -39,20 +39,20 @@
 	"contributes": {
 		"customEditors": [
 			{
-				"viewType": "custom.editor",
-				"displayName": "Custom Editor",
+				"viewType": "joy.editor",
+				"displayName": "Joy Editor",
 				"selector": [
 					{
-						"filenamePattern": "*.editor"
+						"filenamePattern": "*.joy"
 					}
 				]
 			}
 		],
 		"commands": [
 			{
-				"command": "custom.editor.new",
-				"title": "Create new .editor file",
-				"category": "Custom Editor"
+				"command": "joy.editor.new",
+				"title": "Create new Joy file (.joy)",
+				"category": "Joy Editor"
 			}
 		]
 	},

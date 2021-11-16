@@ -47,6 +47,11 @@ function getDevModeHTML(
   const jsUrl = webview.asWebviewUri(
     vscode.Uri.joinPath(context.extensionUri, 'joy.js')
   )
+
+  const fontUrl = webview.asWebviewUri(
+    vscode.Uri.joinPath(context.extensionUri, 'FuturaHandwritten.ttf')
+  )
+
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +59,14 @@ function getDevModeHTML(
     <meta charset="utf-8" />
     <link rel="stylesheet" href="${host}/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Editor</title>
+    <title>Joy Editor</title>
+    <style>
+      @font-face{
+        font-family: 'FuturaHandwritten';
+        font-style: normal;
+        src: url('${fontUrl}') format('truetype');
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -89,6 +101,10 @@ function getProductionModeHTML(
   const joyUrl = webview.asWebviewUri(
     vscode.Uri.joinPath(context.extensionUri, 'joy.js')
   )
+
+  const fontUrl = webview.asWebviewUri(
+    vscode.Uri.joinPath(context.extensionUri, 'FuturaHandwritten.ttf')
+  )
   
 
   return `
@@ -98,7 +114,14 @@ function getProductionModeHTML(
       <meta charset="utf-8" />
       <link rel="stylesheet" href="${cssUrl}" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Editor</title>
+      <title>Joy Editor</title>
+      <style>
+      @font-face{
+        font-family: 'FuturaHandwritten';
+        font-style: normal;
+        src: url('${fontUrl}') format('truetype');
+      }
+    </style>
     </head>
     <body>
       <div id="root"></div>

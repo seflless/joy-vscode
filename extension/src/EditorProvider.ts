@@ -11,8 +11,8 @@ import { EXTENSION_EVENT, UI_EVENT } from './types'
 export class EditorProvider implements vscode.CustomTextEditorProvider {
   private document?: vscode.TextDocument
 
-  // When the editor.editor.new command is triggered, we need to provide a file
-  // name when generating a new .editor file. newFileId's current value is
+  // When the joy.editor.new command is triggered, we need to provide a file
+  // name when generating a new .joy file. newFileId's current value is
   // added to the end of the file to make it unique, and then incremented.
   //
   // While there is probably a more thoughtful way of creating suggested file names,
@@ -23,20 +23,20 @@ export class EditorProvider implements vscode.CustomTextEditorProvider {
 
   // This is called one time by the main extension entry point. See 'extension.ts'.
   // We register commands here and register our custom editor's provider telling VS Code
-  // that we can handle viewing/editing files with the .editor extension.
+  // that we can handle viewing/editing files with the .joy extension.
   public static register(context: vscode.ExtensionContext): vscode.Disposable {
     // This makes a new command show up in the Command Palette that will
-    // create a new empty .editor. The file will actually start out
+    // create a new empty .joy. The file will actually start out
     // as an empty text file, which is fine as the editor treats
     // blank text files as an empty Editor file. Once any change is made
     // and the file saved it will be in a proper JSON format.
 
-    // The command shows up as: "Custom Editor: Create new .editor file".
-    vscode.commands.registerCommand('custom.editor.new', () => {
+    // The command shows up as: "Custom Editor: Create new .joy file".
+    vscode.commands.registerCommand('joy.editor.new', () => {
       // Create a placeholder name for the new file. A new file isn't actually
       // created on disk yet, so this is just an in memory temporary name.
       const id = EditorProvider.newFileId++
-      const name = id > 1 ? `New Document ${id}.editor` : `New Document.editor`
+      const name = id > 1 ? `New Joy ${id}.joy` : `New Joy.joy`
 
       // Create a placeholder file path for the folder. Use the workspace folder
       // if one exists, otherwise make up an empty one.
@@ -45,7 +45,7 @@ export class EditorProvider implements vscode.CustomTextEditorProvider {
 
       // This triggers VS Code to open our custom editor to edit the file.
       // Note: Multiple editors can register to support certain files, so
-      // .editor files might not by default open to our editor. In this case
+      // .joy files might not by default open to our editor. In this case
       // we are explicitly saying to launch our editor so we're streamlined. It
       // may awkwardly ask if they want to use our editor or a text editor when
       // first using our extension.
