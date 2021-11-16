@@ -1,0 +1,79 @@
+{
+	"name": "vscode-editor",
+	"displayName": "VS Code Editor",
+	"description": "A Custom Editor Extension for VS Code.",
+	"version": "0.7.0",
+	"license": "MIT","repository": {
+		"type": "git",
+		"url": "https://github.com/seflless/create-vscode-editor"
+	},
+	"engines": {
+		"vscode": "^1.59.0"
+	},
+	"keywords": [
+		"diagram",
+		"draw",
+		"drawing",
+		"sketch",
+		"design",
+		"documentation"
+	],
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#1d1d1d",
+		"theme": "dark"
+	},
+	"categories": [
+		"Visualization"
+	],
+	"activationEvents": [
+		"onCustomEditor:custom.editor",
+		"onCommand:custom.editor.new"
+	],
+	"browser": "./dist/web/extension.js",
+	"main": "./dist/web/extension.js",
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"contributes": {
+		"customEditors": [
+			{
+				"viewType": "custom.editor",
+				"displayName": "Custom Editor",
+				"selector": [
+					{
+						"filenamePattern": "*.editor"
+					}
+				]
+			}
+		],
+		"commands": [
+			{
+				"command": "custom.editor.new",
+				"title": "Create new .editor file",
+				"category": "Custom Editor"
+			}
+		]
+	},
+	"scripts": {
+		"start:vscode": "node scripts/dev & yarn types:dev",
+		"types:dev": "tsc -w",
+		"web": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=.",
+		"lint": "eslint src --ext ts"
+	},
+	"dependencies": {},
+	"peerDependencies": {},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.31.1",
+		"@typescript-eslint/parser": "^4.31.1",
+		"@vscode/test-web": "^0.0.12",
+		"assert": "^2.0.0",
+		"eslint": "^7.32.0",
+		"mocha": "^9.1.1",
+		"process": "^0.11.10",
+		"ts-loader": "^9.2.5",
+		"typescript": "^4.4.3",
+		"vsce": "^2.2.0"
+	}
+}
