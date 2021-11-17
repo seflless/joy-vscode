@@ -34,6 +34,7 @@ yarn start
  - Add pointer lock to UI controls, especially number scrubbing
  - Add support for functions and then modules (including other .joy files)
  - Make it work well enough on mobile
+ - Add zooming support
  - Perhaps font size could be a tad smaller?
  - A global scrubber/time-stepper would be amazing, if possible to hack in
    - Sub scrubbers for loops would be cool too (each loop nested and not could maintain it's own scrub state for easy step through)
