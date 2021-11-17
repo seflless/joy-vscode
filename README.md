@@ -1,7 +1,9 @@
 # Joy Editor
-This is an experimental editor based on trying to make [Joy](https://ncase.me/joy/) work in a file editor form. For now this only supports the Turtle system.
+This is an experimental editor based on trying to make [Joy](https://ncase.me/joy/) work in a file editor form. For now it only supports the Turtle style drawing features. 
 
-*This editor isn't available on the VS Code Marketplace as of now. If interested you'll have to build from source, see 'Setup' instructions below.*
+This project is partly for testing out the [custom VS Code editor generator I'm building](https://github.com/seflless/create-vscode-extension).
+
+This editor isn't available on the VS Code Marketplace as of now, but you can use install via [each releases attached .vsix installer](https://github.com/seflless/joy-vscode/releases)
 
 <img src="docs/demo-capture.gif"/>
 
