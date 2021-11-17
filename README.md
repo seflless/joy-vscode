@@ -28,6 +28,11 @@ yarn start
  - The undo/redo system needs some work to feel like it's native to Joy. Two top things come to mind
    - Undo/redo boundaries should be on stopping scrubbing (pointerup) on scrubbing numbers or color picking. For text something smarter or based on commit or focus change
    - Text focus/selection state should maintained across undo/redo sync and the UI recreation approach
- - Add support for functions and then modules (including other .joy files)
+   - Camera pan (and zoom when it comes) should be part of undo/redo, but not part of serialization state (I think)
  - Add pointer lock to UI controls, especially number scrubbing
+ - Add support for functions and then modules (including other .joy files)
+ - Make it work well enough on mobile
+ - Perhaps font size could be a tad smaller?
  - A global scrubber/time-stepper would be amazing, if possible to hack in
+   - Sub scrubbers for loops would be cool too (each loop nested and not could maintain it's own scrub state for easy step through)
+

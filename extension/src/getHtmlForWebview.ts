@@ -45,7 +45,7 @@ function getDevModeHTML(
 ): string {
   const host = 'http://localhost:5420'
   const jsUrl = webview.asWebviewUri(
-    vscode.Uri.joinPath(context.extensionUri, 'joy.js')
+    vscode.Uri.joinPath(context.extensionUri, 'static/joy.js')
   )
 
   const fontUrl = webview.asWebviewUri(
@@ -99,7 +99,7 @@ function getProductionModeHTML(
   )
 
   const joyUrl = webview.asWebviewUri(
-    vscode.Uri.joinPath(context.extensionUri, 'joy.js')
+    vscode.Uri.joinPath(context.extensionUri, 'static/joy.js')
   )
 
   const fontUrl = webview.asWebviewUri(

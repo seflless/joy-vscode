@@ -107,21 +107,8 @@ export default function App(): JSX.Element {
         },
       });
     });
-
-    // Data
-    // var data = Joy.loadFromURL();
-    // if (!data) {
-    //   var model = _getParameterByName("drawing") || "star";
-    //   data = Demos[model];
-    // }
-    // data = data || {};
-    const data = currentFile;
-
-    
-    //console.log(currentFile);
-   // console.log(JSON.stringify(data, null, "    "));
-
-    
+  
+    const data = currentFile;  
 
     // Joy
     let joy;
