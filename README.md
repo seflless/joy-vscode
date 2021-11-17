@@ -25,3 +25,4 @@ yarn start
  - The color picker's layout is very broken, fix it
  - The undo/redo system needs some work to feel like it's native to Joy
  - Add support for functions and then modules (including other .joy files)
+ - Add pointer lock to UI controls, especially number scrubbing
