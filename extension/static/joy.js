@@ -1597,8 +1597,8 @@ modal.Color = function(config){
 	var FULL_WIDTH = MARGIN_1+WHEEL_SIZE+MARGIN_2+SPECTRUM_WIDTH+MARGIN_3;
 	var FULL_HEIGHT = MARGIN_1+WHEEL_SIZE+MARGIN_3;
 
-	self.dom.style.width = FULL_WIDTH;
-	self.dom.style.height = FULL_HEIGHT;
+	self.dom.style.width = FULL_WIDTH+'px';
+	self.dom.style.height = FULL_HEIGHT+'px';
 
 	/////////////////////////////
 	// 1) The Color Wheel ///////
@@ -1609,12 +1609,12 @@ modal.Color = function(config){
 	var wheelContext = wheelCanvas.getContext("2d");
 	wheelCanvas.width = WHEEL_SIZE*2;
 	wheelCanvas.height = WHEEL_SIZE*2;
-	wheelCanvas.style.width = wheelCanvas.width/2;
-	wheelCanvas.style.height = wheelCanvas.height/2;
+	wheelCanvas.style.width = wheelCanvas.width/2+'px';
+	wheelCanvas.style.height = wheelCanvas.height/2+'px';
 	dom.appendChild(wheelCanvas);
 
-	wheelCanvas.style.top = MARGIN_1;
-	wheelCanvas.style.left = MARGIN_1;
+	wheelCanvas.style.top = MARGIN_1+'px';;
+	wheelCanvas.style.left = MARGIN_1+'px';;
 
 	var _updateWheel = function(){
 
@@ -1684,12 +1684,12 @@ modal.Color = function(config){
 	var spectrumContext = spectrumCanvas.getContext("2d");
 	spectrumCanvas.width = SPECTRUM_WIDTH*2;
 	spectrumCanvas.height = WHEEL_SIZE*2;
-	spectrumCanvas.style.width = spectrumCanvas.width/2;
-	spectrumCanvas.style.height = spectrumCanvas.height/2;
+	spectrumCanvas.style.width = spectrumCanvas.width/2+'px';
+	spectrumCanvas.style.height = spectrumCanvas.height/2+'px';
 	dom.appendChild(spectrumCanvas);
 
-	spectrumCanvas.style.top = MARGIN_1;
-	spectrumCanvas.style.right = MARGIN_3;
+	spectrumCanvas.style.top = MARGIN_1+'px';
+	spectrumCanvas.style.right = MARGIN_3+'px';
 
 	var _updateSpectrum = function(){
 
@@ -1734,8 +1734,8 @@ modal.Color = function(config){
 	var pickerContext = pickerCanvas.getContext("2d");
 	pickerCanvas.width = FULL_WIDTH*2;
 	pickerCanvas.height = FULL_HEIGHT*2;
-	pickerCanvas.style.width = pickerCanvas.width/2;
-	pickerCanvas.style.height = pickerCanvas.height/2;
+	pickerCanvas.style.width = pickerCanvas.width/2+'px';
+	pickerCanvas.style.height = pickerCanvas.height/2+'px';
 	dom.appendChild(pickerCanvas);
 
 	var _updatePickers = function(){

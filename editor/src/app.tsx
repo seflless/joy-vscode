@@ -15,6 +15,7 @@ declare let currentFile: any;
 export default function App(): JSX.Element {
   const rTLDrawState = React.useRef<any>();
   const rCanvas = React.useRef<any>(null);
+  const rEditor = React.useRef<any>(null);
 
   React.useEffect(() => {
     // If no initial document content was set, initialize it to the default file content
@@ -123,14 +124,14 @@ export default function App(): JSX.Element {
         data: data,
       });
       document.querySelector("#player").innerHTML = "";
-      document.querySelector("#editor").innerHTML = "";
+      rEditor.current.innerHTML = "";
       
       document.querySelector("#player").appendChild(turtle.canvas);
       joy = new Joy({
         init: "I'm a turtle! I do the following: {id:'turtleInstructions', type:'actions'} <hr> {type:'save'}",
 
         data: data,
-        container: "#editor",
+        container: rEditor.current,
         modules: ["turtle", "instructions", "math"],
 
         previewActions: true,
@@ -229,7 +230,7 @@ export default function App(): JSX.Element {
     <div id="content" onPointerUp={onPointerUp}>
       <div id="container">
         <div id="player"></div>
-        <div id="editor"></div>
+        <div ref={rEditor} id="editor"></div>
       </div>
     </div>
   );
