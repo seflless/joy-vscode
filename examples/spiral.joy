@@ -28,7 +28,7 @@
       },
       {
         "type": "instructions/comment",
-        "value": "What this does, basically, is make me go in a triangle... but every time I draw a side, I draw it slightly bigger than the last one. Result: a triangular spiral!"
+        "value": ""
       },
       {
         "type": "math/set",

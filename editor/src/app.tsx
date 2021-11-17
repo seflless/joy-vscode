@@ -20,7 +20,7 @@ export default function App(): JSX.Element {
     // If no initial document content was set, initialize it to the default file content
     // The extension will set the initial currentFile to null if so
     currentFile = currentFile || clone(defaultDocument);
-    let lastSentFile = stringify(currentFile);
+    let lastSentFile;
 
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
@@ -121,59 +121,70 @@ export default function App(): JSX.Element {
     //console.log(currentFile);
    // console.log(JSON.stringify(data, null, "    "));
 
-    // Init
-    window.turtle = new Turtle({
-      width: 500,
-      height: 500,
-      data: data,
-    });
-    document.querySelector("#player").appendChild(turtle.canvas);
+    
 
     // Joy
-    let joy = null;
-    joy = new Joy({
-      init: "I'm a turtle! I do the following: {id:'turtleInstructions', type:'actions'} <hr> {type:'save'}",
+    let joy;
 
-      data: data,
-      container: "#editor",
-      modules: ["turtle", "instructions", "math"],
+    function resetJoy(data){
+      lastSentFile = stringify(data);
+      joy = null; 
+      // Init
+      window.turtle = new Turtle({
+        width: 500,
+        height: 500,
+        data: data,
+      });
+      document.querySelector("#player").innerHTML = "";
+      document.querySelector("#editor").innerHTML = "";
+      
+      document.querySelector("#player").appendChild(turtle.canvas);
+      joy = new Joy({
+        init: "I'm a turtle! I do the following: {id:'turtleInstructions', type:'actions'} <hr> {type:'save'}",
 
-      previewActions: true,
-      previewNumbers: true,
-      previewVariables: true,
+        data: data,
+        container: "#editor",
+        modules: ["turtle", "instructions", "math"],
 
-      onupdate: function (my) {
-        turtle.start();
-        my.turtleInstructions.act(turtle);
-        turtle.draw();
+        previewActions: true,
+        previewNumbers: true,
+        previewVariables: true,
 
-        // TOTAL HACK BUT W/E
-        if (
-          my.actor.activePreview &&
-          my.actor.activePreview.type == "actions"
-        ) {
-          var label = "";
-          for (var key in turtle._variables) {
-            var value = turtle._variables[key];
-            if (value.toString().length > 10)
-              value = turtle._variables[key].toFixed(2); // hax
-            label += key + ": " + value + "\n";
+        onupdate: function (my) {
+          turtle.start();
+          my.turtleInstructions.act(turtle);
+          turtle.draw();
+
+          // TOTAL HACK BUT W/E
+          if (
+            my.actor.activePreview &&
+            my.actor.activePreview.type == "actions"
+          ) {
+            var label = "";
+            for (var key in turtle._variables) {
+              var value = turtle._variables[key];
+              if (value.toString().length > 10)
+                value = turtle._variables[key].toFixed(2); // hax
+              label += key + ": " + value + "\n";
+            }
+            turtle.label(label);
           }
-          turtle.label(label);
-        }
 
-        if(joy!== null){
-          const latestFileStringified = stringify(data)
-          if( latestFileStringified !== lastSentFile){
-            sendDocumentChanges(latestFileStringified); 
+          if(joy!== null){
+            const latestFileStringified = stringify(data)
+            if( latestFileStringified !== lastSentFile){
+              sendDocumentChanges(latestFileStringified); 
+            }
+            
           }
-          
-        }
-      },
-    });
-    turtle.ondrag = function () {
-      joy.update();
-    };
+        },
+      });
+      turtle.ondrag = function () {
+        joy.update();
+      };
+    }
+
+    resetJoy(data)
 
     
 
@@ -201,10 +212,13 @@ export default function App(): JSX.Element {
       switch (message.data.eventType) {
         case "FILE_UNDO":
         case "FILE_REDO":
+          
           currentFile =
             message.data.text === ""
               ? clone(defaultDocument)
               : JSON.parse(message.data.text);
+          resetJoy(currentFile)
+
           syncVisualsToState();
           break;
       }
