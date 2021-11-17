@@ -35,4 +35,5 @@ yarn start
  - Perhaps font size could be a tad smaller?
  - A global scrubber/time-stepper would be amazing, if possible to hack in
    - Sub scrubbers for loops would be cool too (each loop nested and not could maintain it's own scrub state for easy step through)
+ - Support if not standardize on embedding in an SVG (.joy.svg?)
 
