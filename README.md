@@ -22,7 +22,7 @@ git clone git@github.com:seflless/joy-vscode.git
 cd joy-editor
 yarn start
 # Press F5 or Run -> Start Debugging
-# Open up the examples folder within the VS Code window that is launche
+# Open up the examples folder within the VS Code window that is launched, then pick a .joy file to edit
 ```
 
 **Todo**
