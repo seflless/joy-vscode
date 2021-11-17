@@ -6,6 +6,8 @@ import "./styles.css";
 import clone from "rfdc/default";
 import Turtle from "./turtle";
 import Demos from "./demos";
+import { throttle } from 'throttle-debounce';
+
 
 // Will be placed in global scope by extension
 declare let currentFile: any;
@@ -18,10 +20,21 @@ export default function App(): JSX.Element {
     // If no initial document content was set, initialize it to the default file content
     // The extension will set the initial currentFile to null if so
     currentFile = currentFile || clone(defaultDocument);
+    let lastSentFile = stringify(currentFile);
 
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
 
+    // When the editor's document changes, post the stringified document to the vscode extension.
+    const sendDocumentChanges = throttle(1000, false, (latestFileStringified) => {
+      lastSentFile = latestFileStringified;
+      console.log("Changed!");
+      vscode.postMessage({
+        type: UI_EVENT.EDITOR_UPDATED,
+        text: latestFileStringified,
+      });  
+    });
+        
     try{
 
     Joy.module("turtle", function () {
@@ -103,8 +116,10 @@ export default function App(): JSX.Element {
     // }
     // data = data || {};
     const data = currentFile;
-    console.log(currentFile);
-    console.log(JSON.stringify(data, null, "    "));
+
+    
+    //console.log(currentFile);
+   // console.log(JSON.stringify(data, null, "    "));
 
     // Init
     window.turtle = new Turtle({
@@ -115,7 +130,8 @@ export default function App(): JSX.Element {
     document.querySelector("#player").appendChild(turtle.canvas);
 
     // Joy
-    window.joy = Joy({
+    let joy = null;
+    joy = new Joy({
       init: "I'm a turtle! I do the following: {id:'turtleInstructions', type:'actions'} <hr> {type:'save'}",
 
       data: data,
@@ -144,6 +160,14 @@ export default function App(): JSX.Element {
             label += key + ": " + value + "\n";
           }
           turtle.label(label);
+        }
+
+        if(joy!== null){
+          const latestFileStringified = stringify(data)
+          if( latestFileStringified !== lastSentFile){
+            sendDocumentChanges(latestFileStringified); 
+          }
+          
         }
       },
     });
@@ -196,29 +220,20 @@ export default function App(): JSX.Element {
     }
   }, []);
 
-  // When the editor's document changes, post the stringified document to the vscode extension.
-  function sendDocumentChanges() {
-    vscode.postMessage({
-      type: UI_EVENT.EDITOR_UPDATED,
-      text: JSON.stringify(currentFile),
-    });
-  }
-
-  function resetFile() {
-    currentFile = defaultDocument;
-
-    const ctx = rCanvas.current.getContext("2d");
-    ctx.fillRect(0, 0, rCanvas.current.width, rCanvas.current.height);
-
-    sendDocumentChanges();
+  function onPointerUp(){
+    console.log('POINTER UP');
   }
 
   return (
-    <div id="content">
+    <div id="content" onPointerUp={onPointerUp}>
       <div id="container">
         <div id="player"></div>
         <div id="editor"></div>
       </div>
     </div>
   );
+}
+
+function stringify(object){
+  return JSON.stringify(object, null, "  " );
 }
