@@ -1,9 +1,11 @@
 # Joy Editor
 This is an experimental editor based on trying to make [Joy](https://ncase.me/joy/) work in a file editor form. For now this only supports the Turtle system.
 
+*This editor isn't available on the VS Code Marketplace as of now. If interested you'll have to build from source, see 'Setup' instructions below.*
+
 <img src="docs/demo-capture.gif"/>
 
-*This editor isn't available on the VS Code Marketplace, so for now you'll have to build from source if interested. See 'Setup' instructions below.*
+
 
 **New Features Added (So far)**
  - You can now save, load, and version controlling your .joy files
@@ -14,7 +16,7 @@ This is an experimental editor based on trying to make [Joy](https://ncase.me/jo
 ## Setup
 
 ```
-git clone
+git clone git@github.com:seflless/joy-vscode.git
 cd joy-editor
 yarn start
 # Press F5 or Run -> Start Debugging
