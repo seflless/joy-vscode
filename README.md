@@ -26,7 +26,6 @@ yarn start
 ```
 
 **Todo**
- - The color picker's layout is very broken, fix it
  - The undo/redo system needs some work to feel like it's native to Joy. Two top things come to mind
    - Undo/redo boundaries should be on stopping scrubbing (pointerup) on scrubbing numbers or color picking. For text something smarter or based on commit or focus change
    - Text focus/selection state should maintained across undo/redo sync and the UI recreation approach
@@ -39,4 +38,5 @@ yarn start
  - A global scrubber/time-stepper would be amazing, if possible to hack in
    - Sub scrubbers for loops would be cool too (each loop nested and not could maintain it's own scrub state for easy step through)
  - Support if not standardize on embedding in an SVG (.joy.svg?)
+   - This looks very interesting, might be worth trying to drop it in https://github.com/gliffy/canvas2svg
 

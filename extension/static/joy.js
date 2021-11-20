@@ -1055,19 +1055,20 @@ ui.Scrubber = function(config){
 		config.onchange(newValue);
 	};
 
+	let valueChanged = false;
 	// DRAG IT, BABY
 	var isDragging = false;
 	var wasDragging = false;
 	var lastDragX, startDragValue;
 	var delta = 0;
-	var _onmousedown = function(event){
+	var _onpointerdown = function(event){
 		isDragging = true;
 		lastDragX = event.clientX;
 		startDragValue = self.value;
 		delta = 0;
 		if(config.onstart) config.onstart();
 	};
-	var _onmousemove = function(event){
+	var _onpointermove = function(event){
 		if(isDragging){
 
 			wasDragging = true;
@@ -1092,6 +1093,7 @@ ui.Scrubber = function(config){
 				self.value = newValue;
 				self.setLabel(newValue);
 				_onValueChange(newValue);
+				valueChanged = true;
 			}
 
 		}
@@ -1101,24 +1103,31 @@ ui.Scrubber = function(config){
 		if(max!==undefined && newValue>max) newValue=max;
 		return newValue;
 	};
-	var _onmouseup = function(){
+	var _onpointerup = function(){
 		isDragging = false;
 		if(config.onstop) config.onstop();
 		setTimeout(function(){
 			wasDragging = false; // so can't "click" if let go on scrubber
 		},1);
+
+		if(valueChanged){
+			window.commitChange = true;
+			_onValueChange(self.value);
+			window.commitChange = false;
+		}
+		valueChanged = false;
 	};
 
 	// MOUSE EVENTS
-	dom.addEventListener("mousedown", _onmousedown);
-	window.addEventListener("mousemove", _onmousemove);
-	window.addEventListener("mouseup", _onmouseup);
+	dom.addEventListener("pointerdown", _onpointerdown);
+	window.addEventListener("pointermove", _onpointermove);
+	window.addEventListener("pointerup", _onpointerup);
 
 	// KILL ALL LISTENERS
 	self.kill = function(){
-		dom.removeEventListener("mousedown", _onmousedown);
-		window.removeEventListener("mousemove", _onmousemove);
-		window.removeEventListener("mouseup", _onmouseup);
+		dom.removeEventListener("pointerdown", _onpointerdown);
+		window.removeEventListener("pointermove", _onpointermove);
+		window.removeEventListener("pointerup", _onpointerup);
 	};
 
 	// On click: edit manually!
@@ -1134,7 +1143,16 @@ ui.Scrubber = function(config){
 			_countSigFigs(dom.innerText); // re-calc sigfigs
 			self.value = _parseNumber();
 			self.setLabel(self.value);
-			_onValueChange(self.value);
+
+			if(valueChanged){
+				window.commitChange = true;
+				_onValueChange(self.value);
+				window.commitChange = false;
+				valueChanged = false;
+			} else {
+				_onValueChange(self.value);
+			}
+			
 
 			// On Stop editing
 			if(config.onstop) config.onstop();
@@ -1171,6 +1189,8 @@ ui.Scrubber = function(config){
 
 		// Show that change!
 		_onValueChange(_parseNumber());
+		
+		valueChanged = true;
 
 	};
 	var _parseNumber = function(){
@@ -1827,7 +1847,10 @@ modal.Color = function(config){
 		_updateWheel();
 		_updatePickers();
 	};
-	var _onmousedown = function(event){
+
+	let valueWasChanged = false;
+	var _onpointerdown = function(event){
+		valueWasChanged = false;
 		isDragging = true;
 		if(event.offsetX*2 < MARGIN_1*2 + wheelCanvas.width + MARGIN_2){
 			editMode = "hs";
@@ -1836,17 +1859,25 @@ modal.Color = function(config){
 		}
 		_update(event);
 	};
-	var _onmousemove = function(event){
+	var _onpointermove = function(event){
 		if(isDragging) _update(event);
 	};
-	var _onmouseup = function(){
+	var _onpointerup = function(){
 		isDragging = false;
+
+		if(valueWasChanged){
+			console.log("Color was changed, commit an undo/redo")
+			window.commitChange = true;
+			_updateSource();
+			window.commitChange = false;
+		}
+		valueWasChanged = false;
 	};
 
 	// MOUSE EVENTS
-	pickerCanvas.addEventListener("mousedown", _onmousedown);
-	window.addEventListener("mousemove", _onmousemove);
-	window.addEventListener("mouseup", _onmouseup);
+	pickerCanvas.addEventListener("pointerdown", _onpointerdown);
+	window.addEventListener("pointermove", _onpointermove);
+	window.addEventListener("pointerup", _onpointerup);
 
 	// UPDATE SOURCE
 	var _updateSource = function(){
@@ -1855,15 +1886,17 @@ modal.Color = function(config){
 		newValue[1] = parseFloat(newValue[1].toFixed(2));
 		newValue[2] = parseFloat(newValue[2].toFixed(2));
 		config.onchange(newValue);
+
+		valueWasChanged = true;
 	};
 
 	// Kill
 	self.kill = function(){
 		
 		// KILL LISTENERS
-		dom.removeEventListener("mousedown", _onmousedown);
-		window.removeEventListener("mousemove", _onmousemove);
-		window.removeEventListener("mouseup", _onmouseup);
+		dom.removeEventListener("pointerdown", _onpointerdown);
+		window.removeEventListener("pointermove", _onpointermove);
+		window.removeEventListener("pointerup", _onpointerup);
 
 		// Hide Modal
 		modal.hide();
@@ -2422,7 +2455,7 @@ Joy.add({
 				dom.classList.add("joy-previewing");
 
 			};
-			bulletContainer.onmousemove = function(event){
+			bulletContainer.onpointermove = function(event){
 				if(self.previewData) _calculatePreviewParam(event);
 			};
 			bulletContainer.onmouseleave = function(){
@@ -3021,13 +3054,13 @@ Joy.module("math", function(){
 					if(chainActor.type!="choose"){
 						(function(ca){
 							// HACK: click, NOT scrub. detect w/ time frame
-							var _mouseDownTime;
-							ca.dom.addEventListener("mousedown", function(){
-								_mouseDownTime = +(new Date());
+							var _pointerdownTime;
+							ca.dom.addEventListener("pointerdown", function(){
+								_pointerdownTime = +(new Date());
 							});
-							ca.dom.addEventListener("mouseup", function(){
+							ca.dom.addEventListener("pointerup", function(){
 								var _time = +(new Date());
-								if(_time-_mouseDownTime < 500){
+								if(_time-_pointerdownTime < 500){
 									_showChooser(ca); // if clicked in less than a half second
 								}
 							});

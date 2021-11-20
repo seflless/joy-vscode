@@ -158,7 +158,7 @@ export default function App(): JSX.Element {
             turtle.label(label);
           }
 
-          if(joy!== null){
+          if(joy!== null && window.commitChange === true ){
             const latestFileStringified = stringify(data)
             if( latestFileStringified !== lastSentFile){
               sendDocumentChanges(latestFileStringified); 
