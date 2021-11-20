@@ -124,7 +124,19 @@ export default function App(): JSX.Element {
         data: data,
       });
       document.querySelector("#player").innerHTML = "";
+
+      
+      /* 
+       * Entirely blow away the Joy editor and all it's DOM elements on 
+       * undo/redo state change. So far this works out pretty well.
+       * Joy injects a Modal element with the id 'joy-modal' so we remove
+       * that too.
+      **/
       rEditor.current.innerHTML = "";
+      const modal = document.getElementById('joy-modal');
+      if( modal ){
+        modal.parentElement.removeChild(modal)
+      }
       
       document.querySelector("#player").appendChild(turtle.canvas);
       joy = new Joy({
@@ -158,10 +170,12 @@ export default function App(): JSX.Element {
             turtle.label(label);
           }
 
-          if(joy!== null && window.commitChange === true ){
-            const latestFileStringified = stringify(data)
-            if( latestFileStringified !== lastSentFile){
-              sendDocumentChanges(latestFileStringified); 
+          if(joy!== null ){
+            if( window.commitChange === true ){
+              const latestFileStringified = stringify(data)
+              if( latestFileStringified !== lastSentFile){
+                sendDocumentChanges(latestFileStringified); 
+              }
             }
             
           }

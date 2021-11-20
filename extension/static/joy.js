@@ -473,9 +473,11 @@ So that a player can slowly step up the staircase of complexity
 
 Joy.modules = {};
 Joy.module = function(id, callback){
+	console.log("Joy.module ",id)
 	Joy.modules[id] = callback;
 };
 Joy.loadModule = function(id){
+	console.log(Joy.loadModule,id)
 	var module = Joy.modules[id];
 	if(!module) throw Error("There's no module called '"+id+"'!");
 	module();
@@ -1551,6 +1553,7 @@ modal.Chooser = function(config){
 			(function(option){
 				// TODO: Hover & preview mode?
 				optionDOM.onclick = function(event){
+					
 					self.onchange(option.value);
 					event.stopPropagation(); // no, don't double-fire
 				};
@@ -1562,8 +1565,11 @@ modal.Chooser = function(config){
 
 	// On Select
 	self.onchange = function(value){
+		
 		self.kill();
+		window.commitChange = true;
 		config.onchange(value); // on select AFTER kill, since can create ANOTHER modal
+		window.commitChange = false;
 	};
 
 	// Kill & Remove
